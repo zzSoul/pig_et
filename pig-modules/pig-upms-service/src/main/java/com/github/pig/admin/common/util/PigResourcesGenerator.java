@@ -42,7 +42,7 @@ public class PigResourcesGenerator {
 
 
     public static void main(String[] args) {
-        String outputDir = "/Users/lengleng/work/temp";
+        String outputDir = "/zzz/work/temp";
         final String viewOutputDir = outputDir + "/view/";
         AutoGenerator mpg = new AutoGenerator();
         // 全局配置
@@ -56,7 +56,7 @@ public class PigResourcesGenerator {
         gc.setBaseResultMap(true);
         // XML columList
         gc.setBaseColumnList(true);
-        gc.setAuthor("lengleng");
+        gc.setAuthor("zzz");
         mpg.setGlobalConfig(gc);
 
         // 数据源配置
@@ -64,8 +64,8 @@ public class PigResourcesGenerator {
         dsc.setDbType(DbType.MYSQL);
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("lengleng");
-        dsc.setUrl("jdbc:mysql://139.224.200.249:3309/pig?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false");
+        dsc.setPassword("atcc2018");
+        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/pig?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false");
         mpg.setDataSource(dsc);
 
         // 策略配置
