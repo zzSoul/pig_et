@@ -74,6 +74,9 @@ public class PigResourcesGenerator {
         strategy.setSuperControllerClass("com.github.pig.common.web.BaseController");
         // 表名生成策略
         strategy.setNaming(NamingStrategy.underline_to_camel);
+        // 包含表明
+        strategy.setInclude("atc_nfc_code");
+
         mpg.setStrategy(strategy);
 
         // 包配置

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.pig.admin.mapper.AtcNfcCodeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.github.pig.admin.model.entity.NfcCode">
+        <id column="id" property="id" />
+        <result column="encrypted_coding" property="encryptedCoding" />
+        <result column="version_number" property="versionNumber" />
+        <result column="super_chain" property="superChain" />
+        <result column="code_status" property="codeStatus" />
+        <result column="creation_time" property="creationTime" />
+        <result column="creater" property="creater" />
+        <result column="update_time" property="updateTime" />
+        <result column="modifier" property="modifier" />
+        <result column="del_flag" property="delFlag" />
+        <result column="alternate_field1" property="alternateField1" />
+        <result column="alternate_field2" property="alternateField2" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, encrypted_coding AS encryptedCoding, version_number AS versionNumber, super_chain AS superChain, code_status AS codeStatus, creation_time AS creationTime, creater, update_time AS updateTime, modifier, del_flag AS delFlag, alternate_field1 AS alternateField1, alternate_field2 AS alternateField2
+    </sql>
+
+</mapper>
