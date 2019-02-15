@@ -1,6 +1,8 @@
 package com.github.pig.admin.model.entity;
 
+import com.baomidou.mybatisplus.enums.IdType;
 import java.util.Date;
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
@@ -12,19 +14,33 @@ import java.io.Serializable;
  * </p>
  *
  * @author zzz
- * @since 2018-12-25
+ * @since 2019-01-21
  */
-@TableName("atc_nfc_code")
-public class NfcCode extends Model<NfcCode> {
+@TableName("atc_work_code")
+public class AtcWorkCode extends Model<AtcWorkCode> {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 主键
+     */
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
     /**
-     * 加密编码
+     * 作品编码
+     */
+    @TableField("work_code")
+    private String workCode;
+    /**
+     * sha256加密后编码
      */
     @TableField("encrypted_coding")
     private String encryptedCoding;
+    /**
+     * 编码状态
+     */
+    @TableField("code_status")
+    private String codeStatus;
     /**
      * 版本号
      */
@@ -36,41 +52,32 @@ public class NfcCode extends Model<NfcCode> {
     @TableField("super_chain")
     private String superChain;
     /**
-     * 编码状态
-     */
-    @TableField("code_status")
-    private String codeStatus;
-    /**
      * 创建时间
      */
-    @TableField("creation_time")
-    private Date creationTime;
+    @TableField("create_time")
+    private Date createTime;
     /**
      * 创建人
      */
     private String creater;
+    /**
+     * 备注
+     */
+    private String remarks;
     /**
      * 修改时间
      */
     @TableField("update_time")
     private Date updateTime;
     /**
-     * 修改人
-     */
-    private String modifier;
-    /**
      * 删除标识
      */
     @TableField("del_flag")
     private String delFlag;
     /**
-     * 备注
+     * 修改人
      */
-    @TableField("remarks")
-    private String remarks;
-
-    @TableField("alternate_field1")
-    private String alternateField1;
+    private String modifier;
 
 
     public Integer getId() {
@@ -81,12 +88,28 @@ public class NfcCode extends Model<NfcCode> {
         this.id = id;
     }
 
+    public String getWorkCode() {
+        return workCode;
+    }
+
+    public void setWorkCode(String workCode) {
+        this.workCode = workCode;
+    }
+
     public String getEncryptedCoding() {
         return encryptedCoding;
     }
 
     public void setEncryptedCoding(String encryptedCoding) {
         this.encryptedCoding = encryptedCoding;
+    }
+
+    public String getCodeStatus() {
+        return codeStatus;
+    }
+
+    public void setCodeStatus(String codeStatus) {
+        this.codeStatus = codeStatus;
     }
 
     public String getVersionNumber() {
@@ -105,20 +128,12 @@ public class NfcCode extends Model<NfcCode> {
         this.superChain = superChain;
     }
 
-    public String getCodeStatus() {
-        return codeStatus;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCodeStatus(String codeStatus) {
-        this.codeStatus = codeStatus;
-    }
-
-    public Date getCreationTime() {
-        return creationTime;
-    }
-
-    public void setCreationTime(Date creationTime) {
-        this.creationTime = creationTime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public String getCreater() {
@@ -129,20 +144,20 @@ public class NfcCode extends Model<NfcCode> {
         this.creater = creater;
     }
 
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
     public Date getUpdateTime() {
         return updateTime;
     }
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public String getModifier() {
-        return modifier;
-    }
-
-    public void setModifier(String modifier) {
-        this.modifier = modifier;
     }
 
     public String getDelFlag() {
@@ -153,23 +168,13 @@ public class NfcCode extends Model<NfcCode> {
         this.delFlag = delFlag;
     }
 
-    public String getRemarks() {
-        return remarks;
+    public String getModifier() {
+        return modifier;
     }
 
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
+    public void setModifier(String modifier) {
+        this.modifier = modifier;
     }
-
-    public String getAlternateField1() {
-        return alternateField1;
-    }
-
-    public void setAlternateField1(String alternateField1) {
-        this.alternateField1 = alternateField1;
-    }
-
-
 
     @Override
     protected Serializable pkVal() {
@@ -178,18 +183,19 @@ public class NfcCode extends Model<NfcCode> {
 
     @Override
     public String toString() {
-        return "NfcCode{" +
+        return "AtcWorkCode{" +
         ", id=" + id +
+        ", workCode=" + workCode +
         ", encryptedCoding=" + encryptedCoding +
+        ", codeStatus=" + codeStatus +
         ", versionNumber=" + versionNumber +
         ", superChain=" + superChain +
-        ", codeStatus=" + codeStatus +
-        ", creationTime=" + creationTime +
+        ", createTime=" + createTime +
         ", creater=" + creater +
-        ", updateTime=" + updateTime +
-        ", modifier=" + modifier +
-        ", delFlag=" + delFlag +
         ", remarks=" + remarks +
+        ", updateTime=" + updateTime +
+        ", delFlag=" + delFlag +
+        ", modifier=" + modifier +
         "}";
     }
 }

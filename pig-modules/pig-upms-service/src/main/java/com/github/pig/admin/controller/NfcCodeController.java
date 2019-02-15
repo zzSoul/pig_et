@@ -2,6 +2,7 @@ package com.github.pig.admin.controller;
 import java.util.*;
 
 import com.github.pig.admin.common.util.EncryptionUtil;
+import com.github.pig.admin.model.dto.NfcCodeDTO;
 import com.github.pig.admin.model.entity.NfcCode;
 import com.github.pig.admin.service.NfcCodeService;
 import com.github.pig.common.util.UserUtils;
@@ -48,7 +49,13 @@ public class NfcCodeController extends BaseController {
     @RequestMapping("/page")
     public Page page(@RequestParam Map<String, Object> params) {
         params.put(CommonConstant.DEL_FLAG, CommonConstant.STATUS_NORMAL);
-        return nfcCodeService.selectPage(new Query<>(params), new EntityWrapper<>());
+//        return nfcCodeService.selectPage(new Query<>(params), new EntityWrapper<>());
+        String encryptedCoding = (String) params.get("encryptedCoding");
+        if ("".equals(encryptedCoding)){
+            params.put("encrypted_coding",encryptedCoding);
+            params.remove("encryptedCoding");
+        }
+        return nfcCodeService.selectPage(new Query<>(params), new EntityWrapper<NfcCode>());
     }
 
     /**
@@ -108,15 +115,14 @@ public class NfcCodeController extends BaseController {
     /**
      * 批量生成nfc码
      * @param nfcCode
-     * @param number
      * @return success/false
      */
     @RequestMapping("/batchAddition")
-    public R<Boolean> batchAddition(@RequestBody NfcCode nfcCode,int number){
+    public R<Boolean> batchAddition(@RequestBody NfcCodeDTO nfcCode ){
         EncryptionUtil encryptionUtil = new EncryptionUtil();
         String user = UserUtils.getUser();
         List<NfcCode> nfcCodes = new ArrayList<>();
-        for (int i = 0; i < number; i++) {
+        for (int i = 0; i < nfcCode.getNumber(); i++) {
 
             UUID uuid = UUID.randomUUID();
             Date date = new Date();
@@ -125,17 +131,18 @@ public class NfcCodeController extends BaseController {
             String code = encryptionUtil.SHA256(originalCode);
             NfcCode oneCode = new NfcCode();
             oneCode.setEncryptedCoding(code);
-            String newCode="t=2&c="+code+"&l=96&z=79&x=46&w=96&q=23 ";
+            String newCode="t=2&c="+code+"&l="+(new Random().nextInt(90)+10)+"&z="+(new Random().nextInt(90)+10)+"&x="+(new Random().nextInt(90)+10)+"&w="+(new Random().nextInt(90)+10)+"&q="+(new Random().nextInt(90)+10) ;
             oneCode.setSuperChain(newCode);
             oneCode.setCodeStatus("0");
             oneCode.setCreater(user);
             oneCode.setDelFlag("0");
             oneCode.setCreationTime(date);
             oneCode.setVersionNumber(nfcCode.getVersionNumber());
+            oneCode.setRemarks(nfcCode.getRemarks());
 
             nfcCodes.add(oneCode);
         }
 
-        return new R<>(nfcCodeService.insertBatch(nfcCodes, number));
+        return new R<>(nfcCodeService.insertBatch(nfcCodes, nfcCode.getNumber()));
     }
 }

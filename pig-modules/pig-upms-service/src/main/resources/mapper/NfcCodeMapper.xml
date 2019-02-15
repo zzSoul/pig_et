@@ -14,13 +14,13 @@
         <result column="update_time" property="updateTime" />
         <result column="modifier" property="modifier" />
         <result column="del_flag" property="delFlag" />
+        <result column="remarks" property="remarks" />
         <result column="alternate_field1" property="alternateField1" />
-        <result column="alternate_field2" property="alternateField2" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, encrypted_coding AS encryptedCoding, version_number AS versionNumber, super_chain AS superChain, code_status AS codeStatus, creation_time AS creationTime, creater, update_time AS updateTime, modifier, del_flag AS delFlag, alternate_field1 AS alternateField1, alternate_field2 AS alternateField2
+        id, encrypted_coding AS encryptedCoding, version_number AS versionNumber, super_chain AS superChain, code_status AS codeStatus, creation_time AS creationTime, creater, update_time AS updateTime, modifier, del_flag AS delFlag, remarks AS remarks, alternate_field1 AS alternateField1
     </sql>
 
 </mapper>

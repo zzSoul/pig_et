@@ -75,7 +75,7 @@ public class PigResourcesGenerator {
         // 表名生成策略
         strategy.setNaming(NamingStrategy.underline_to_camel);
         // 包含表明
-        strategy.setInclude("atc_nfc_code");
+        strategy.setInclude("atc_work_code");
 
         mpg.setStrategy(strategy);
 
