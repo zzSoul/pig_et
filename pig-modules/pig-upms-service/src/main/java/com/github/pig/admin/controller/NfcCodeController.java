@@ -46,7 +46,7 @@ public class NfcCodeController extends BaseController {
     * @param params 分页对象
     * @return 分页对象
     */
-    @RequestMapping("/page")
+    /*@RequestMapping("/page")
     public Page page(@RequestParam Map<String, Object> params) {
         params.put(CommonConstant.DEL_FLAG, CommonConstant.STATUS_NORMAL);
 //        return nfcCodeService.selectPage(new Query<>(params), new EntityWrapper<>());
@@ -56,6 +56,12 @@ public class NfcCodeController extends BaseController {
             params.remove("encryptedCoding");
         }
         return nfcCodeService.selectPage(new Query<>(params), new EntityWrapper<NfcCode>());
+    }*/
+
+    @RequestMapping("/page")
+    public Page page(@RequestParam Map<String, Object> params,NfcCode nfcCode) {
+        params.put(CommonConstant.DEL_FLAG, CommonConstant.STATUS_NORMAL);
+        return nfcCodeService.pageSelect(new Query<>(params), nfcCode);
     }
 
     /**

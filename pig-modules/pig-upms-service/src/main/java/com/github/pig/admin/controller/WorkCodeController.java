@@ -98,6 +98,7 @@ public class WorkCodeController extends BaseController {
         String atcWorkCode = CodeUtil.generate();
         AtcWorkCode generateCode = new AtcWorkCode();
         generateCode.setVersionNumber(atcWorkCode);
+        generateCode.setDelFlag("0");
         EntityWrapper<AtcWorkCode> entityWrapper = new EntityWrapper<>();
         entityWrapper.setEntity(generateCode);
 //        校验是否重复

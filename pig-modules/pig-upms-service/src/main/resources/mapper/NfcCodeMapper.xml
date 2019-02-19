@@ -23,4 +23,27 @@
         id, encrypted_coding AS encryptedCoding, version_number AS versionNumber, super_chain AS superChain, code_status AS codeStatus, creation_time AS creationTime, creater, update_time AS updateTime, modifier, del_flag AS delFlag, remarks AS remarks, alternate_field1 AS alternateField1
     </sql>
 
+    <select id="pageSelect" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM atc_nfc_code AS anc
+        <where>
+            del_flag = 0
+            <if test="encrypted_coding != null and encrypted_coding != ''">
+                and encrypted_coding LIKE CONCAT('%',#{encrypted_coding},'%')
+            </if>
+            <if test="version_number != null and version_number != ''">
+                and version_number LIKE CONCAT('%',#{version_number},'%')
+            </if>
+            <if test="super_chain != null and super_chain != ''">
+                and super_chain LIKE CONCAT('%',#{super_chain},'%')
+            </if>
+            <if test="code_status != null and code_status != ''">
+                and code_status = #{code_status}
+            </if>
+            <if test="remarks != null and remarks != ''">
+                and remarks LIKE CONCAT('%',#{remarks},'%')
+            </if>
+            ORDER BY create_time DESC
+        </where>
+    </select>
 </mapper>
