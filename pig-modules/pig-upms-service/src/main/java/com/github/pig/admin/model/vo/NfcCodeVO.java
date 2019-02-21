@@ -10,7 +10,6 @@
  */
 package com.github.pig.admin.model.vo;
 
-import com.baomidou.mybatisplus.annotations.TableField;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -66,4 +65,8 @@ public class NfcCodeVO implements Serializable {
      * 删除标识
      */
     private String delFlag;
+    /**
+     * 备注信息
+     */
+    private String remarks;
 }

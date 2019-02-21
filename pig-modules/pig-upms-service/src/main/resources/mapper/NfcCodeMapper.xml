@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.github.pig.admin.mapper.AtcNfcCodeMapper">
+<mapper namespace="com.github.pig.admin.mapper.NfcCodeMapper">
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.github.pig.admin.model.entity.NfcCode">
@@ -20,30 +20,54 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, encrypted_coding AS encryptedCoding, version_number AS versionNumber, super_chain AS superChain, code_status AS codeStatus, creation_time AS creationTime, creater, update_time AS updateTime, modifier, del_flag AS delFlag, remarks AS remarks, alternate_field1 AS alternateField1
+        id, encrypted_coding AS encryptedCoding,
+         version_number AS versionNumber,
+         super_chain AS superChain,
+         code_status AS codeStatus,
+         creation_time AS creationTime,
+         creater, update_time AS updateTime,
+         modifier, del_flag AS delFlag,
+         remarks AS remarks,
+         alternate_field1 AS alternateField1
     </sql>
 
     <select id="pageSelect" resultMap="BaseResultMap">
-        SELECT <include refid="Base_Column_List"></include>
+        SELECT
+        <!--<include refid="Base_Column_List"></include>-->
+        id, encrypted_coding,
+        version_number,
+        super_chain,
+        code_status,
+        creation_time,
+        creater, update_time,
+        modifier, del_flag,
+        remarks
         FROM atc_nfc_code AS anc
         <where>
             del_flag = 0
-            <if test="encrypted_coding != null and encrypted_coding != ''">
-                and encrypted_coding LIKE CONCAT('%',#{encrypted_coding},'%')
+            <if test="nfcCode.encryptedCoding != null and nfcCode.encryptedCoding != ''">
+                and anc.encrypted_coding LIKE CONCAT('%',#{nfcCode.encryptedCoding},'%')
             </if>
-            <if test="version_number != null and version_number != ''">
-                and version_number LIKE CONCAT('%',#{version_number},'%')
+            <if test="nfcCode.versionNumber != null and nfcCode.versionNumber != ''">
+                and anc.version_number = #{nfcCode.versionNumber}
             </if>
-            <if test="super_chain != null and super_chain != ''">
-                and super_chain LIKE CONCAT('%',#{super_chain},'%')
+            <if test="nfcCode.superChain != null and nfcCode.superChain != ''">
+                and anc.super_chain LIKE CONCAT('%',#{nfcCode.superChain},'%')
             </if>
-            <if test="code_status != null and code_status != ''">
-                and code_status = #{code_status}
+            <if test="nfcCode.codeStatus != null and nfcCode.codeStatus != ''">
+                and anc.code_status = #{nfcCode.codeStatus}
             </if>
-            <if test="remarks != null and remarks != ''">
-                and remarks LIKE CONCAT('%',#{remarks},'%')
+            <if test="nfcCode.remarks != null and nfcCode.remarks != ''">
+                and anc.remarks LIKE CONCAT('%',#{nfcCode.remarks},'%')
             </if>
-            ORDER BY create_time DESC
+            ORDER BY anc.creation_time DESC
         </where>
     </select>
+
+    <select id="selectNfcByEC" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include>
+        from atc_nfc_code AS anc
+        where anc.encrypted_coding LIKE CONCAT('%',#{nfcCode.encrypted_coding},'%')
+    </select>
+
 </mapper>

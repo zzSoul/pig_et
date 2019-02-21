@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.pig.admin.mapper.AtcUserInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.github.pig.admin.entity.AtcUserInfo">
+        <id column="id" property="id" />
+        <result column="tel" property="tel" />
+        <result column="pwd" property="pwd" />
+        <result column="num" property="num" />
+        <result column="rmb_money" property="rmbMoney" />
+        <result column="token_money" property="tokenMoney" />
+        <result column="email" property="email" />
+        <result column="pic" property="pic" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="openid" property="openid" />
+        <result column="unionid" property="unionid" />
+        <result column="token" property="token" />
+        <result column="public_key" property="publicKey" />
+        <result column="private_key" property="privateKey" />
+        <result column="dismissal" property="dismissal" />
+        <result column="etherenum_ban" property="etherenumBan" />
+        <result column="del_flag" property="delFlag" />
+        <result column="alternate_field1" property="alternateField1" />
+        <result column="alternate_field2" property="alternateField2" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, tel, pwd, num, rmb_money AS rmbMoney, token_money AS tokenMoney, email, pic, status, create_time AS createTime, update_time AS updateTime, openid, unionid, token, public_key AS publicKey, private_key AS privateKey, dismissal, etherenum_ban AS etherenumBan, del_flag AS delFlag, alternate_field1 AS alternateField1, alternate_field2 AS alternateField2
+    </sql>
+
+</mapper>

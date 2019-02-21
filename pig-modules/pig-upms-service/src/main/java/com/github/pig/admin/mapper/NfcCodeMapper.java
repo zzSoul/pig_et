@@ -2,6 +2,7 @@ package com.github.pig.admin.mapper;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.github.pig.admin.model.entity.NfcCode;
+import com.github.pig.admin.model.vo.NfcCodeVO;
 import com.github.pig.common.util.Query;
 import org.apache.ibatis.annotations.Param;
 
@@ -16,5 +17,7 @@ import java.util.List;
  * @since 2018-12-25
  */
 public interface NfcCodeMapper extends BaseMapper<NfcCode> {
-    List pageSelect(Query query, @Param("nfcCode") NfcCode nfcCode);
+    List pageSelect(Query query, @Param("nfcCode") NfcCodeVO nfcCode);
+//    List pageSelect(Query query, @Param("encryptedCoding") Object encryptedCoding);
+    NfcCode selectNfcByEC(String encryptedCoding);
 }

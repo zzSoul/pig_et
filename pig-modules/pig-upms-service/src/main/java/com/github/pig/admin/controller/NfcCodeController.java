@@ -4,6 +4,7 @@ import java.util.*;
 import com.github.pig.admin.common.util.EncryptionUtil;
 import com.github.pig.admin.model.dto.NfcCodeDTO;
 import com.github.pig.admin.model.entity.NfcCode;
+import com.github.pig.admin.model.vo.NfcCodeVO;
 import com.github.pig.admin.service.NfcCodeService;
 import com.github.pig.common.util.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,9 +60,10 @@ public class NfcCodeController extends BaseController {
     }*/
 
     @RequestMapping("/page")
-    public Page page(@RequestParam Map<String, Object> params,NfcCode nfcCode) {
+    public Page page(@RequestParam Map<String, Object> params, NfcCodeVO nfcCode) {
         params.put(CommonConstant.DEL_FLAG, CommonConstant.STATUS_NORMAL);
-        return nfcCodeService.pageSelect(new Query<>(params), nfcCode);
+        Page page = nfcCodeService.pageSelect(new Query<>(params), nfcCode);
+        return page;
     }
 
     /**
